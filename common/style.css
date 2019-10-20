@@ -2,75 +2,83 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Jomolhari', sans-serif;
 }
 
 body {
     width: 100vw;
     height: 100vh;
-}
-
-h1 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 24px;
-    color: #039be5;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #444444;
-}
-
-.menu {
+    background-color: #3DB4D8;
     display: grid;
-    grid-template-columns: 45% 45%;
-    padding: 20px;
     justify-content: center;
-    align-items: center;
-    column-gap: 20px;
-    row-gap: 20px;
 }
 
-.menu-item p {
-    color: #777777;
-    font-size: 11px;
+.header {
+    padding: 0px;
+    display: grid;
+    justify-items: center;
 }
 
-.menu-item a {
+.header h1 {
+    font-size: 48px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.header h2 {
+    font-size: 24px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 100;
+    text-align: center;
+    color: white;
+}
+
+.header p {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    width: 50%;
+}
+
+.item {
     text-decoration: none;
-    color: #039be5;
+    color: white;
+    display: inline-block;
+    padding: 14px;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .menu-item {
-    box-shadow: 5px 10px 20px #cccccc;
-    padding: 20px;
-    transition: 0.4s;
+    background-color: #68c4e1;
 }
 
-.menu-item:hover {
-    cursor: pointer;
-    transform: scale(1.05);
+.play-button {
+    background-color: #fac45a;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    vertical-align: middle;
+    line-height: 40px;
+    height: 40px;
+    width: 30%;
+    text-align: center;
+    border-bottom: 2px solid #e69b07;
+    text-transform: uppercase;
 }
 
-.bottom-div {
+.menu-item {
     display: grid;
     justify-content: center;
-    padding: 40px;
-}
-
-.bottom-div a {
-    text-decoration: none;
-    display: inline-block;
-    background-color: #039be5;
-    color: white;
-    padding: 10px 40px;
-    border-radius: 10px;
-}
-
-.definition {
-    text-align: center;
-    padding: 20px;
-    color: #777777;
+    grid-template-columns: 30% 30% 30%;
+    align-items: center;
+    justify-items: center;
+    gap: 20px;
 }

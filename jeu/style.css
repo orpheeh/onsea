@@ -8,4 +8,10 @@ body {
     display: grid;
     grid-template-columns: auto 40%;
     align-items: center;
+    padding: 20px;
+    background-color: #68c4e1;
+}
+
+canvas {
+    border: 2px solid white;
 }

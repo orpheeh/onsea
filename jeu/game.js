@@ -11,6 +11,7 @@ const SEA_HEIGHT = 10;
 const SEA_WIDTH = WINDOW_WIDTH;
 
 let score = 0;
+let _gameOver = false;
 
 function Component(x, y, width, height, color) {
     this.x = x;
@@ -48,22 +49,26 @@ function Water(x, y, width, height, color) {
 }
 
 const actionsBad = [
-    "coca-cola", "petrol", "nuclear"
+    "nuclear", "car"
 ];
 
 const actionsGood = [
-    "solar"
+    "solar", "velo"
 ];
 
 const BAD = 0;
 const GOOD = 1;
+let waterUp = true;
 
 function Action(x, y, width, height, color, type, image) {
     this.component = new Component(x, y, width, height, color);
     this.type = type;
     this.draw = function(ctx) {
         console.log(image);
-        ctx.drawImage(document.getElementById(image), this.x, this.y);
+        const di = document.getElementById(image);
+        di.width = 32;
+        di.height = 32;
+        ctx.drawImage(di, this.component.x, this.component.y);
     }
     this.moveBottom = function() {
         this.component.newPos(0, 1);
@@ -96,32 +101,42 @@ function Game(ctx, ground, sea, player) {
     this.initialize = function() {
         playerMoveInit(this.player);
         setInterval(() => {
-            const type = Math.round(Math.random() * 3);
+            if (waterUp == true) {
+                this.sea.up(1);
+            }
+            const type = Math.round(Math.random() * 1);
             const array = type == GOOD ? actionsGood : actionsBad;
-            const imageIndex = Math.round(Math.random() * array.length);
-            console.log(imageIndex);
+            const imageIndex = Math.round(Math.random() * (array.length - 1));
             this.actions.push(new Action(Math.random() * WINDOW_WIDTH,
-                0, 10, 10, type == GOOD ? "green" : "red", type, type == GOOD ? actionsGood[imageIndex] : actionsBad[imageIndex]));
-        }, 1000);
+                0, 10, 10, type == GOOD ? "green" : "red", type, array[imageIndex]));
+        }, 2000);
     }
-
+    this.isGameOver = function() {
+        _gameOver = this.player.component.y > this.sea.component.y;
+        return _gameOver;
+    }
     this.update = function() {
-        this.actions.forEach(a => {
-            a.moveBottom();
-            if (a.component.collision(this.player.component)) {
-                if (a.type == BAD) {
-                    this.sea.up(1);
-                } else if (a.type == GOOD) {
-                    score++;
-                    displayScore();
-                }
-                for (let i = 0; i < this.actions.length; i++) {
-                    if (a === this.actions[i]) {
-                        this.actions.splice(i, 1);
+        if (!this.isGameOver()) {
+            this.actions.forEach(a => {
+                a.moveBottom();
+                if (a.component.collision(this.player.component)) {
+                    if (a.type == BAD) {
+                        waterUp = true;
+                    } else if (a.type == GOOD) {
+                        score++;
+                        waterUp = false;
+                        displayScore();
+                    }
+                    for (let i = 0; i < this.actions.length; i++) {
+                        if (a === this.actions[i]) {
+                            this.actions.splice(i, 1);
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            displayGameOver();
+        }
     }
 
     this.render = function() {
@@ -133,6 +148,10 @@ function Game(ctx, ground, sea, player) {
         this.sea.draw(ctx);
         this.player.draw(ctx);
     }
+}
+
+function displayGameOver() {
+    document.getElementById('game-over').innerHTML = "Game Over";
 }
 
 function displayScore() {
