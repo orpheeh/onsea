@@ -5,12 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>On Sea | Sauve la planète</title>
+
+    <style>
+        canvas {
+            width: 600px;
+            height: 600px;
+        }
+        
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
 </head>
 
 <body>
     <canvas id="sauve-la-planete" width="400px" height="400px"></canvas>
+    <div class="assets">
+        <img src="./player.png.png" alt="player" id="player">
+        <img src="./background-2.png" id="background-1" alt="background">
+        <h1 id="score">Score: 0</h1>
+        <div class="actions">
+            <div class="action">
+                <img src="https://images.unsplash.com/photo-1516660198581-439b5ac48822?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" id="nuclear" alt="alt">
+                <p>L'énergie nucléaire</p>
+            </div>
 
+            <div class="action">
+                <img src="https://images.unsplash.com/photo-1554169360-f86ef83314ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" id="coca-cola" alt="alt">
+                <p>Coca cola</p>
+            </div>
+
+            <div class="action">
+                <img src="https://images.unsplash.com/photo-1509389928833-fe62aef36deb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" id="solar" alt="alt">
+                <p>Panneau solaire</p>
+            </div>
+
+            <div class="action">
+                <img src="https://images.unsplash.com/photo-1505184158618-46f1e609d036?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" id="petrol" alt="">
+                <p>Pétrol</p>
+            </div>
+        </div>
+    </div>
     <script src="./game.js"></script>
 </body>
 

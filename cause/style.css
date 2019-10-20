@@ -1,0 +1,39 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    width: 100vw;
+    background-color: #29b6f6;
+}
+
+body * {
+    color: white;
+}
+
+.cause-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    justify-items: center;
+    gap: 40px;
+}
+
+.cause {
+    display: inline-block;
+    padding: 20px;
+}
+
+.cause h2,
+p {
+    text-align: center;
+}
+
+.illustration {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+}
