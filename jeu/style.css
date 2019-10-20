@@ -2,16 +2,27 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
     display: grid;
-    grid-template-columns: auto 40%;
-    align-items: center;
+    grid-template-columns: auto auto;
+    align-items: flex-start;
     padding: 20px;
-    background-color: #68c4e1;
+    background-color: #757575;
+    gap: 20px;
 }
 
 canvas {
     border: 2px solid white;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.action {
+    padding-bottom: 20px;
 }

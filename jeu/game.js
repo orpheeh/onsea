@@ -78,6 +78,31 @@ function Action(x, y, width, height, color, type, image) {
     }
 }
 
+const LTR = 0;
+const RTL = 1;
+
+function Enemy(x, y, width, height, color, img, direction) {
+    this.component = new Component(x, y, width, height, color);
+    this.direction = direction;
+    this.draw = function(ctx) {
+        const image = document.getElementById(img);
+        ctx.drawImage(image, this.component.x, this.component.y);
+    }
+    this.update = function() {
+        if (this.direction == LTR) {
+            this.component.newPos(3, 0);
+            if (this.component.x + this.component.width >= WINDOW_WIDTH) {
+                this.component.x = 0;
+            }
+        } else if (this.direction == RTL) {
+            this.component.newPos(-3, 0);
+            if (this.component.x + this.component.width < 0) {
+                this.component.x = WINDOW_WIDTH + this.component.width
+            }
+        }
+    }
+}
+
 function Player(x, y, width, height, color) {
     this.component = new Component(x, y, width, height, color);
     this.draw = function(ctx) {
@@ -90,6 +115,12 @@ function Player(x, y, width, height, color) {
     this.moveRight = function() {
         this.component.newPos(10, 0);
     }
+    this.moveUp = function() {
+        this.component.newPos(0, -10);
+    }
+    this.moveDown = function() {
+        this.component.newPos(0, 10);
+    }
 }
 
 function Game(ctx, ground, sea, player) {
@@ -98,6 +129,7 @@ function Game(ctx, ground, sea, player) {
     this.sea = sea;
     this.player = player;
     this.actions = [];
+    this.enemy = [];
     this.initialize = function() {
         playerMoveInit(this.player);
         setInterval(() => {
@@ -109,14 +141,23 @@ function Game(ctx, ground, sea, player) {
             const imageIndex = Math.round(Math.random() * (array.length - 1));
             this.actions.push(new Action(Math.random() * WINDOW_WIDTH,
                 0, 10, 10, type == GOOD ? "green" : "red", type, array[imageIndex]));
-        }, 2000);
+        }, 500);
     }
     this.isGameOver = function() {
+        if (_gameOver)
+            return true;
         _gameOver = this.player.component.y > this.sea.component.y;
         return _gameOver;
     }
     this.update = function() {
         if (!this.isGameOver()) {
+            if (this.sea.component.y <= WINDOW_HEIGHT && this.enemy.length < 1) {
+                const croco = new Enemy(0, WINDOW_HEIGHT - 32, 32, 32, "red", 'croco-ltr', LTR);
+                this.enemy.push(croco);
+            } else if (this.sea.component.y <= WINDOW_HEIGHT - 50 - 32 && this.enemy.length < 2) {
+                const requin = new Enemy(WINDOW_WIDTH + 32, WINDOW_HEIGHT - 50, 32, 32, "red", 'requin-rtl', RTL);
+                this.enemy.push(requin);
+            }
             this.actions.forEach(a => {
                 a.moveBottom();
                 if (a.component.collision(this.player.component)) {
@@ -134,6 +175,12 @@ function Game(ctx, ground, sea, player) {
                     }
                 }
             });
+            this.enemy.forEach(e => {
+                e.update();
+                if (e.component.collision(this.player.component)) {
+                    _gameOver = true;
+                }
+            });
         } else {
             displayGameOver();
         }
@@ -145,6 +192,9 @@ function Game(ctx, ground, sea, player) {
         this.actions.forEach(a => {
             a.draw(ctx);
         });
+        this.enemy.forEach(e => {
+            e.draw(ctx);
+        })
         this.sea.draw(ctx);
         this.player.draw(ctx);
     }
@@ -161,9 +211,21 @@ function displayScore() {
 function playerMoveInit(player) {
     window.addEventListener('keyup', (e) => {
         if (e.key === 'q') {
-            player.moveLeft();
+            if (player.component.x >= 0) {
+                player.moveLeft();
+            }
         } else if (e.key === 'd') {
-            player.moveRight();
+            if (player.component.x + player.component.width < WINDOW_WIDTH) {
+                player.moveRight();
+            }
+        } else if (e.key === 'z') {
+            if (player.component.y >= WINDOW_HEIGHT - 150) {
+                player.moveUp();
+            }
+        } else if (e.key === 's') {
+            if (player.component.y + player.component.height < WINDOW_HEIGHT) {
+                player.moveDown();
+            }
         }
     });
 }

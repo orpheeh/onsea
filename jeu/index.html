@@ -23,32 +23,42 @@
 
 <body>
     <canvas id="sauve-la-planete" width="400px" height="400px"></canvas>
-    <div class="assets">
-        <img src="./player.png.png" alt="player" id="player">
-        <img src="./background-2.png" id="background-1" alt="background">
-        <h1 id="score">Score: 0</h1>
-        <h1 id="game-over"></h1>
-        <div class="actions">
-            <div class="action">
-                <img src="./car.png" id="car" alt="alt">
-                <p>Voiture</p>
-            </div>
+    <div class="control">
+        <div class="assets">
+            <img src="./player.png.png" alt="player" id="player">
+            <img src="./background-2.png" id="background-1" alt="background">
+            <img src="./croco-ltr.png" id="croco-ltr" alt="Croco LTR">
+            <img src="./requin-rtl.png" alt="Requin RTL" id="requin-rtl">
+            <h1 id="score">Score: 0</h1>
+            <h1 id="game-over"></h1>
+            <div class="actions">
+                <div class="action">
+                    <img src="./car.png" id="car" alt="alt">
+                    <p>Voiture</p>
+                </div>
 
-            <div class="action">
-                <img src="nuclear.png" id="nuclear" alt="alt">
-                <p>Energie nucleaire</p>
-            </div>
+                <div class="action">
+                    <img src="nuclear.png" id="nuclear" alt="alt">
+                    <p>Energie nucleaire</p>
+                </div>
 
-            <div class="action">
-                <img src="solar.png" id="solar" alt="alt">
-                <p>Panneau solaire</p>
-            </div>
+                <div class="action">
+                    <img src="solar.png" id="solar" alt="alt">
+                    <p>Panneau solaire</p>
+                </div>
 
-            <div class="action">
-                <img src="velo.png" id="velo" alt="">
-                <p>Vélo</p>
+                <div class="action">
+                    <img src="velo.png" id="velo" alt="">
+                    <p>Vélo</p>
+                </div>
             </div>
         </div>
+
+        <div class="instruction">
+            <h1>Instructions</h1>
+            <h4>Vos actions ont des conséquences directes sur le réchauffement climatique qui est la principale cause de la montée des eaux. Vous devez donc faire les bon choix si ne voulez pas être submergé par les flots</h4>
+        </div>
+
     </div>
     <script src="./game.js"></script>
 </body>
