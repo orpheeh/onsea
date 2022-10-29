@@ -141,7 +141,7 @@ function Game(ctx, ground, sea, player) {
             const imageIndex = Math.round(Math.random() * (array.length - 1));
             this.actions.push(new Action(Math.random() * WINDOW_WIDTH,
                 0, 10, 10, type == GOOD ? "green" : "red", type, array[imageIndex]));
-        }, 500);
+        }, 1000);
     }
     this.isGameOver = function() {
         if (_gameOver)
@@ -151,10 +151,10 @@ function Game(ctx, ground, sea, player) {
     }
     this.update = function() {
         if (!this.isGameOver()) {
-            if (this.sea.component.y <= WINDOW_HEIGHT && this.enemy.length < 1) {
+            if (this.sea.component.y <= WINDOW_HEIGHT - 32 && this.enemy.length < 1) {
                 const croco = new Enemy(0, WINDOW_HEIGHT - 32, 32, 32, "red", 'croco-ltr', LTR);
                 this.enemy.push(croco);
-            } else if (this.sea.component.y <= WINDOW_HEIGHT - 50 - 32 && this.enemy.length < 2) {
+            } else if (this.sea.component.y <= WINDOW_HEIGHT - 50 && this.enemy.length < 2) {
                 const requin = new Enemy(WINDOW_WIDTH + 32, WINDOW_HEIGHT - 50, 32, 32, "red", 'requin-rtl', RTL);
                 this.enemy.push(requin);
             }
